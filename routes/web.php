@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
+use Symfony\Component\Yaml\Yaml;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,25 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('posts');
+    // return view('posts');
+    Yaml::parseFile('posts.yaml');
 });
 
-Route::get('/posts/{post}', function ($slug){
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-    if(!file_exists($path)){
-        return redirect('/');
-    }
+Route::get('/posts/{post}', function ($slug) {
 
-    //don't perform expensive operations such as file_get_contents() until you know you need to
-    //if the content doesn't change much, you can cache it
-    $post = cache()->remember("posts.{$slug}", 5, fn() => file_get_contents($path));
-
-    //use view() helper function to return a view
-    //the first argument is the name of the view
-    //the second argument is an array of data to pass to the view
-    $post = file_get_contents($path);
     return view('post', [
-        'post' => $post
+        'post' => Post::find($slug)
     ]);
 });
 //can use sql like syntax to get the post with certain syntax
