@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,24 @@
     <link rel="stylesheet" href="/app.css">
     <title>My Blog</title>
 </head>
+
 <body>
+    <?php foreach ($posts as $post) : ?>
     <article>
-        <h1><a href="/post">My First Post</a></h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Quisquam, quae. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Deleniti quas ipsa quia fugit odio, laudantium aspernatur laboriosam, earum quidem ipsum ab adipisci. 
-                Dignissimos iusto, at numquam id obcaecati pariatur eaque!
-            </p>
+        <h1>
+            <a href="/posts/<?= $post->slug ?>">
+                <?= $post->title ?>
+            </a>
+
+            <div>
+                <?= $post->excerpt ?>
+            </div>
     </article>
 
-    <a href="/"> Go Back</a>
-
+    <div>
+        <?= $post->excerpt ?>
+    </div>
+    <?php endforeach; ?>
 </body>
+
 </html>
