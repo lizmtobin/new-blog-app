@@ -10,22 +10,22 @@
 </head>
 
 <body>
-    <?php foreach ($posts as $post) : ?>
-    <article>
+    @foreach ($posts as $post)
+    <article class="{{$loop->even ? 'foof' : 'bar'}}">
         <h1>
-            <a href="/posts/<?= $post->slug ?>">
-                <?= $post->title ?>
+            <a href="/posts/{{$post->slug}}">
+                {{ $post->title }}
             </a>
-
-            <div>
-                <?= $post->excerpt ?>
-            </div>
+        </h1>
+        <div>
+            {{$post->excerpt }}
+        </div>
     </article>
 
     <div>
         <?= $post->excerpt ?>
     </div>
-    <?php endforeach; ?>
+    @endforeach
 </body>
 
 </html>
