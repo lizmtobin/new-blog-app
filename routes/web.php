@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\Category;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 //use Symfony\Component\Yaml\Yaml;
@@ -33,3 +34,10 @@ Route::get('/posts/{post:slug}', function (Post $post) { // Post::where('slug', 
 });
 //can use sql like syntax to get the post with certain syntax
 //->whereAlpha('post', '[A-z_\-]+');
+
+Route::get('/categories/{category:slug}', function (Category $category) {
+
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
+});
